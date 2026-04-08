@@ -36,7 +36,7 @@ The system uses a **3-layer approach**:
    * Undefined variables
    * Unused variables
    * Division by zero detection
-   * 
+   
 ###  Structured Error Reporting
 
 Each issue includes:
@@ -120,7 +120,7 @@ GET /api/history
 ```
 
 
-## 🚀 Future Enhancements
+##  Future Enhancements
 
 * AI-based explanation layer (advanced suggestions)
 * Code optimization and time complexity analysis
