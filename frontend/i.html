@@ -15,7 +15,7 @@
             display: flex;
         }
 
-        /* SIDEBAR */
+        /*  SIDEBAR  */
         .sidebar {
             width: 30%;
             background: #111;
@@ -30,7 +30,7 @@
             text-align: center;
         }
 
-        /* MAIN AREA */
+        /* MAIN AREA  */
         .main {
             width: 70%;
             padding: 20px;
@@ -45,6 +45,7 @@
             padding: 12px;
             font-size: 14px;
             border-radius: 6px;
+            box-sizing: border-box;
         }
 
         button {
@@ -63,12 +64,50 @@
             background: #4834d4;
         }
 
-        /* RESULT CARDS */
+        button:disabled {
+            background: #444;
+            cursor: not-allowed;
+        }
+
+        /* FILE UPLOAD */
+        .upload-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 7px 14px;
+            background: #2c2c54;
+            border: 1px dashed #6c5ce7;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #ccc;
+            transition: 0.2s;
+        }
+
+        .upload-label:hover {
+            background: #3a3a6a;
+        }
+
+        #file-upload {
+            display: none;
+        }
+
+        #file-name {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /*  RESULT CARDS */
         .card {
             background: #2c2c54;
             margin-top: 12px;
             padding: 12px;
-            border-radius: 8px;   /* improved UI */
+            border-radius: 8px;
         }
 
         .error {
@@ -79,7 +118,37 @@
             border-left: 5px solid orange;
         }
 
-        /*  HISTORY ITEMS */
+        .notice {
+            border-left: 5px solid #00b894;
+        }
+
+        /* AI EXPLANATION BADGE */
+        .ai-explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #1a1a3e;
+            border-left: 3px solid #a29bfe;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #d0cffe;
+        }
+
+        .ai-explanation::before {
+            content: "✦ AI Explanation: ";
+            font-weight: bold;
+            color: #a29bfe;
+        }
+
+        #enhance-btn {
+            background: #2d3436;
+            border: 1px solid #6c5ce7;
+        }
+
+        #enhance-btn:hover:not(:disabled) {
+            background: #6c5ce7;
+        }
+
+        /* HISTORY ITEMS */
         .history-item {
             background: #2c2c54;
             padding: 10px;
@@ -100,6 +169,11 @@
             overflow-x: auto;
         }
 
+        .status-msg {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
     </style>
 </head>
 
@@ -107,29 +181,38 @@
 
 <div class="layout">
 
-    <!SIDEBAR >
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <h3>History</h3>
         <div id="history"></div>
     </div>
 
-    <!MAIN >
+    <!-- MAIN  -->
     <div class="main">
         <h2>Python Static Code Analyzer</h2>
 
         <textarea id="code" placeholder="Paste your Python code here..."></textarea>
 
+        <!-- File upload row -->
+        <div class="upload-row">
+            <label class="upload-label" for="file-upload">📂 Upload .py file</label>
+            <input type="file" id="file-upload" accept=".py">
+            <span id="file-name">No file selected</span>
+        </div>
+
         <br>
 
         <button onclick="analyzeCode()">Analyze Code</button>
+        <button id="enhance-btn" onclick="enhanceExplanations()" disabled>✦ Enhance Explanations</button>
         <button onclick="loadHistory()">Refresh History</button>
 
+        <div id="status" class="status-msg"></div>
         <div id="results"></div>
     </div>
 
 </div>
 
-<script src="live.js"></script>
+<script src="jsfi.js"></script>
 
 </body>
 </html>
