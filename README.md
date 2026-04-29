@@ -251,8 +251,5 @@ This project provides a **complete workflow from code input to structured analys
 
 It is designed as a **scalable foundation** for building advanced developer tools with AI-assisted learning.
 
----
-
-```
 
 
