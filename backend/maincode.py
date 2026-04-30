@@ -65,7 +65,7 @@ class AnalysisRepository:
     def persist(source: str, diagnostics: list[Diagnostic]) -> None:
         payload = json.dumps([d.to_dict() for d in diagnostics])
         timestamp = datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ") if hasattr(datetime, 'UTC') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
-        with _db_conn() as conn:
+        with _db_conn() as cinn:
             conn.execute(
                 "INSERT INTO analysis_runs (source_code, diagnostics, recorded_at) VALUES (?,?,?)",
                 (source, payload, timestamp),
